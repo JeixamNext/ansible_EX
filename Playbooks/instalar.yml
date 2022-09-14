@@ -1,0 +1,6 @@
+---
+- name: instalar y configuarar apache2
+  hosts: curso01:curso04
+  remote_user: jeixam
+  roles:
+   -apache2

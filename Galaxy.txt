@@ -1,0 +1,26 @@
+Ansible Galaxy es el repositorio gratuito donde se alojan roles para ser usados en los playbooks
+
+- https://galaxy.ansible.com/
+- https://galaxy.ansible.com/docs/
+
+- ansible-galaxy: descargar roles atraves de galaxy o un scm (control de versiones como git)
+
+Ansible galaxy comandos: accion,opciones,argumentos
+
+- delete
+- import 
+- info
+- init 
+- install: descarga
+- list
+- login
+- remove
+- search 
+
+ejemplo: 
+
+ansible-galaxy search nginx
+ansible-galaxy install bennojoy.nginx (ect/ansible/roles)
+ansible-galaxy init pruebarol
+
+

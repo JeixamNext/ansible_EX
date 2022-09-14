@@ -1,0 +1,14 @@
+---
+- name: assert
+  hosts: localhost
+  vars: 
+    num: 10
+  tasks:
+   - debug: msg= "Hostname {{ansible_hostname}} FQDN {{ansible_fqdn}}"
+   - fail: msg="numero no es 10"
+     when: num !=10
+   - assert:
+       msg: "numero que tiene que estar entre 0 y 100"
+       that: 
+        - num<= 100
+        - num> 0

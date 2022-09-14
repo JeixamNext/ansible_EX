@@ -1,0 +1,45 @@
+---
+  hosts: localhost
+  vars: 
+    - notificar: "hipchat"
+  tasks:
+    - hipchat:
+        api: https://api.hipchat.com/v2/
+        token: "kjfldjfkdsjflhdsfkjdsf" #el que te den con la cuenta de usuario al crear la sala
+        room: "misala"
+        msg: "tarea {{ansible_fqdn}}" #nombre del servidor
+        when: notificar == "hipchat"
+    - mail:
+        subject: "tarea finalizada"
+        body: "tarea finalizada {{ansible_fqdn}}" #nombre del servidor
+      delegate_to: localhost
+      when: notificar == "mail" # -e notificacion=mail
+    - pip: name=pushbullet.py #asegurarse que esta instalado
+      when: notificar == "pushbullet"
+    - pushbullet:
+        api_key: o.kjaygednvcldidos736ekcod # obtenida de la pagina web 
+        divice: "android"
+        title: "notification {{ansible_fqdn}}"
+      when: notificar == "pushbullet"
+    - pushover:
+        msg: "notificacion desde {{ansible_fqdn}}"
+        app_token: "ksjdlkdpdidkdodold"
+        user_key: "lkdkdkdlsksñustsfsyls"
+      when: notificar == "pushóver"
+    - name: enviar notificaciones a rocket chat 
+      rocketchat:
+        token: "kajdodkdokdkdytrvegycir,mcnvt"
+        domain: cloud.oforte.net:3000
+        channel: "#oforte"
+        msg: '{{inventary_hostname}} completed '
+        protocol: http
+        delegate_to: localhost
+        when: notificar == "rocketchat"
+    - name: enviar notificaciones a slack 
+      slack:
+        token: "kajdodkdokdkdytrvegycir,mcnvt"
+        channel: "#oforte"
+        color: "warning"
+        msg: '{{inventary_hostname}} completed '
+        delegate_to: localhost
+        when: notificar == "slack"

@@ -1,0 +1,17 @@
+- name: tarea async
+  host: www 
+  tasks:
+    - command: sleep 15 
+      async: 60 # tiempo maximo de ejecucion
+      poll: 5   # tiempo de consulta de la tarea asincrona 
+    - command: apt update
+      async: 160 
+      poll: 0
+      registrer: estado_poll
+    - debug: msg="otra tarea"
+    - debug: msg="otra tarea mas"
+    - async_status:
+        jid: "{{estado_poll.ansible_job_id}}"
+      registrer: estado
+      until: estado.finished
+      retries: 30 # veces que lo va a intentar

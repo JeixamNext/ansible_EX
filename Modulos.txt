@@ -1,0 +1,184 @@
+Modulos: ansible esta comùesto por ellos, administrar sistemas,dispositivosusuarios y muchas mas cosas.
+
+- cada tarea esta asociada a un modulo
+- ansible-doc -l: listar todos los modulos disponiles
+- ansible-doc modulo: info sobre el modulo 
+
+modulos de ficheros
+- acl: establece y obtiene informacion de las listas de control de acceso
+- archive: crea un fichero comprimido a partir de una lista de ficheros o estructura de directorios
+- assemble: generar un fichero de configuracion desde fragmentos
+- blockinfile: inserta/actualiza/elimina un bloque de texto de un fichero
+- copy: copia ficheros a ubicaciones
+- fetch: obtiene ficheros de un nodo remoto 
+- file: establece atributos a ficheros
+- find: busca
+- inifile: gestiona variables de un fichero INI
+- iso-extract: estrae ficheros de una iso
+- lineinfile: asegura que una linea esta en un fichero o remplaza su contenido usando expresiones regulares
+- patch: aplica parches utilizando GNU patch
+- replace: remplaza coincidencias de un texto especifico por otro indicado
+- stat: obtiene informacion de ficheros o sistemas de ficheros 
+- sincronize: sincroniza utilizando rsync
+- tempfile: crea ficheros o directorios temporales
+- template: copiar y procesar una plantilla a un nodo 
+- unarchive: extraer un fichero 
+- xattr establece/obtiene atributos extendidos 
+
+modulos para openssl
+- openssl_privatekey: genera claves privadas ssl
+- openssl_publickey: genera claves publicas ssl
+
+modulo gestion de paquetes: algunos
+
+- bower: administra paquetes para desarollo web
+- bundler:administra dependencias (ruby,gem)
+- composer: gestiona librerias php 
+- cpanm: gestiona modulos perl (cpan)
+- lucy-install: gestiona modulos/librerias de python
+- gem: gestiona ruby gems
+- maven-artefact: descarga artefacts desde un repositorio maven (java)
+- npm: gestiona paquetes node.js con npn
+- pear: gestionar paquetes pear/pel (php)
+- pip: gestionar librerias python 
+- apk: gestiona paquetes android
+- apt/apt.key/apt_repository: gestiona apt (debian,ubuntu,ect)
+- dnf:gestionar paquetes fedora ç
+- macports: gestona paqetes macports (OSX)
+- openbsd_pkg: gestiona paquetes openssd
+- package: gestiona paquetes genericos (distinge el tipo de OS y usa el modulo correcto)
+- pacman: gestiona paquetes de arch linux
+- pkg5 : gestiona paquetes para solaris 11 
+- pkgin: gestiona paquetes smartOS,netbsd y otros 
+- redhat_subserition: administra registros
+- yum: gestiona paquetes yum (centos,redhat,ect)
+- zypper: gestiona paquetes suse/openSuse
+
+modulo conados y utilidades:
+
+- command: ejecuta un comando
+- expect: ejecuta un comando y responde a la introduccion de datos (ansible-playbook -e num=-15 assert playbook.yml)
+- raw: envia comandos sin filtar por ssh
+- script: trasfiere y ejecuta un script determinado 
+- shell: ejecuta la consola
+- assert: asegurar que cumple ciertas condiciones
+- debug
+- fail: falla con un mensaje especifico
+- include
+- include_role
+- include_vars
+
+notificaciones modulos:
+
+- cisco-spark: envia mensajes a un canal o usuario usando cosco spark 
+- flowdock envia mensajes (chat colaborativo)
+- slack: chat colaborativo empresarial
+- hipchat: envia notificaciones
+- irc: mensajes a un canal IRC
+- jabber
+- mattermost: similar a slack de codigo abierto 
+- mqt: mensajeria para iot
+- nexmo: envia sms 
+- pushbullet: notificaciones a dispositivos
+- pushover: notificacionen a moviles 
+- rocketchat: silimar a slack de codigo abierto
+- sengrid: envia emails
+- sns: envia mensajes usando amazon (notificaciones amazon)
+- telegram
+- twilo: mensajes a moviles
+
+modulos bbdd:
+
+- mysql-db: añade o elimina bases de datos
+- mysql-replication: administra replicacion
+- mysql-user: añade o elimina usuarios
+- mysql-varables: administra variables globales
+- postgresql-db
+- postgresql-ext: administra extensiones 
+- postgresql-lang: administra procedimientos almacenados
+- postgresql-privs: administra privilegios
+- postgresql-schema: añade o elimina esquemas 
+- postgresql-user
+- mongodb-parameter: gestiona paramentros
+- mongodb-user
+- influxdb-database: administra bases de datos
+- influxdb-policy: administra politicas de retencion
+(HPE)
+- vertica-configuration: gestiona configuracion
+- vertica-facts
+- vertica-role
+- vertica-schema
+- vertica-user
+- plasticsearch-plugin
+- kibana-plugin
+- redis: comandos slave y flush
+- riak
+
+Modulo gestion de sistemas
+
+- alternative: gestiona alternativas para comandos (eleguir version de java por ejemplo)
+- at: programar ejecucion de comandos
+- autorized_keys: gestiona ficheros SSH para las claves para las claves publicas autorizadas
+- cron: gestionar tareas programadas 
+- crybttab: cifrar dispositivos
+- filesystem: gestionar sistemas de ficheros 
+- firewared: gestionar fireware
+- group: gestionar grupos
+- gluster-volme: gestionar volumenes
+- hostname: administrar el nombre del servidor
+- iptables: trabajar reglas de iptables
+- nown-host: añadir o eliminar registros
+- lvg: gestionar grupos de volumenes
+- mount: montar sistemas de ficheros
+- openwnt_init: gestionar servicios openwnt
+- ping
+- Selinux
+- services
+- setup: ifo del sistema 
+- sysctl: configurar sysctlconfig
+- user: gestionar ausuarios 
+
+modulos de windows:
+
+- winacl: establecer permisos a ficheros/directorios
+- win-chocolatery: instala paquetes
+- wind-command: ejecuta comandos
+- wind-copy
+- wind-enviroment: modificar variables de entorno
+- win-feature: isntalar/desisntalar features
+- win-file: crear/eliminar ficheros o directorios
+- win-gwt-url
+- win-group
+- win-msi : instalar desisntalar paquetes msi
+- win-ping
+- win-reboot
+- win-regedit: añadir o eliminar registros
+- win-schedule-task: administrar tareas programadas
+- win-services: habilitar o desabilitar servicios
+- win-shell: ejecutar comandos en consola (powershell)
+
+Modulo control de versiones:
+
+- bzr
+- git
+- git-config
+- github_hooks/keys/relase
+- gitlab_group/project/user: crea eliina o actualiza
+- hg: mercuarial
+- subversion
+
+modulos de instrastructura:
+
+- apache-mod-proxy
+- apache2-module
+- deploy-helper: adminitra algunos pasos para desplegar una api
+- django-manage: gestiona aplicaciones django
+- htpassword: administra usuarios para autentificacion basica
+- jenkins-jobs: administra trabajos jenkins
+- jenkins-plugin: administra los plugings de jenkins
+- gira: añade o modifica incidencias en jira
+
+monitoriazacion:
+
+- nagios
+- zabbix

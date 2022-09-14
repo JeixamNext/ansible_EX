@@ -1,0 +1,12 @@
+---
+- name: Playbook para failled-when
+  host: localhost
+  task:
+    - name: obtener interfaces de red
+      command: ip a
+      resgistrer: salida_log
+      failed_when: "'eth2' not in salida_log.stdout"
+
+    - name: mostar salida
+      debug: var:salida_log
+  

@@ -1,0 +1,11 @@
+---
+- name: primer play
+  hosts: prueba1 
+  remote_user: jeixam
+  become: True
+  tasks:
+   - name: instalar vim
+     apt: name=vim state:latest 
+   - include: isntalar_apache2.yml
+- name: segundo play
+  include: segundo_play.yml

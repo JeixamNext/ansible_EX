@@ -1,0 +1,50 @@
+ansible tower es una solucion web para facilitar las tareas a todos los equipos IT
+
+- proyectos (repositorios de playbook)
+- inventarios(estatis o dinamicos)
+- plantillas de trabajo
+- configuraciones
+
+posee tres ediciones
+
+- self-support: soporte de caracteristicas LDAP,system traking o cuestionarios (gratuita hasta 10 nodos)
+- standard: con soporte 8X5 sin caracteristicas especiales
+- premium: con caracteristicas especiales
+
+requisitos de la isntalacion: 
+
+- servidor especifico para tower (no puede compartir con otras aplicaciones)
+- distrubuciones soportadas: red hat 7, centos 7, Ubuntu 14,04 o 16,04
+- navegador: chrome o firefo
+- 2gb ram
+- 20 gb disco
+
+instalar: https://docs.ansible.com/ansible-tower/latest/html/quickinstall/download_tower.html
+
+- red hat/centos: instalar EPEL: Yum install (https://fedoraproject.org/wiki/EPEL/es) 
+- ubuntu: apt install softweare-prperities-common. apt-add-repository ppa:ansible/ansible
+- https://releases.ansible.com/ansible-tower/setup/ansible-tower-setup-latest.tar.gz?extIdCarryOver=true&sc_cid=701f2000001OH7YAAW
+- descomprimir (tar xvfz)
+- editar el fichero inventory con los servidores y la contraseña
+- ejecutar ./setup.sh
+
+elementos: 
+
+- proyectos: dosde estan los playbooks (plantillas,roles,ect)
+- inventarios: lista los servidores (estatiscos y dinamicos)
+- plantillas: definicion de playbook y en que servidor se ejecutara
+- credenciales: como acceder (ssl o contraseñas)
+- trabajos: ejecucion de plantillas
+- plantillas de flujo de tabajo: contiene la ejecucion de plantillas 
+- cuistiionarios (con licencia): formularios rellenables para ejecutar plantillas
+
+Tower configuracion: 
+
+- usuarios
+- equipos
+- credenciales
+- Gestion: historial,registros,ect
+- inventario
+- notificaciones
+- licencia
+

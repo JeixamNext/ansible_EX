@@ -1,0 +1,13 @@
+---
+  - hosts: ubuntu
+    tasks:
+      - mysql_db: name=oforte state=present
+      - mysql_db: name=all state=dump tarjet=/tmp/{{ansible_hostname}}.sql # copia de seguridad
+      - mysql_user: name=jeixam password=A.33dgdg5kj9@hj##jdhjd€ state=present priv="oforte.*:ALL"
+      - postgres_db: name=oforte state=present encoding="UTF-8"
+        become_user: postgres
+      - postgressql_user: name=jeixam password=A.33dgdg5kj9@hj##jdhjd€ state=present priv=ALL
+        become_user: postgres
+      - mongodb_user: name=jeixam password=A.33dgdg5kj9@hj##jdhjd€ database=admin
+      # pip: name=influxdb state=presnt
+      - influxdb_database: database_name=oforte state=present hostname=localhost

@@ -1,0 +1,8 @@
+---
+  hosts: localhost
+  tasks:
+   - wait_for: port=8080 delay=2
+   - name: esperar hasta que el fichero exista
+     wait_for: path=/tmp/exista
+   - name: esperar hasta que el fichero no exista
+     wait_for: path=/tmp/exista state=absent

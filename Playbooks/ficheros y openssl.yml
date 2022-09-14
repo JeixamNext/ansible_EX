@@ -1,0 +1,21 @@
+---
+- name: ejemplos de modulo de fiches y openssl 
+  host: localhost
+  become: True
+  task:
+    - name: crear fichero con contenido especificado 
+      copy: content="esto es un ejemplo" dest="tmp/pruebas" backup=yes
+    - name: propiedades del fichero
+      file: path:"tmp/pruebas" estate=absent backup=yes
+      debug: var:salida_log
+    - name: directorio exista
+      file: 
+        path: "var/log/journal" 
+        state: directory 
+        owner: root
+        group: systemd-journal
+        mode: 2755
+      notify: reiniciar_journal
+  handlers:
+     - name: reiniciar_journald
+       service: systemd-journald state=restarted

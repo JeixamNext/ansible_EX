@@ -1,0 +1,114 @@
+Lista de tareas a realizar en una lista de servidores especificados. incluye configuracion y variables entre otras cosas.
+
+- usa yaml
+- ansible-playbook (para usar un playbook)
+- ansible-playbook -i ./inventaario.py copiar-hosts.yml
+
+elementos esenciales: 
+
+- host: especifica grupo o servidor si es mas de uno separar por ":" "&" en ambos y "!" negacion
+	- hosts: serweb:& madrid: los que estan en serweb y madrid 
+	- hosts: serweb:! madrid: los que no eten en madrid 
+	- hosts: serweb:madrid: todos los que estan en los dos grupos
+
+- remote_user: usuario
+	-become:True/false: si es root o no 
+	-become-user: cambiar de usuario a uno root
+	-become_method: sudo metodo para super usuario 
+	-check-mode:True/fase: comprueba que se puedan realizar las acciones
+
+opciones basicas:
+
+-i: especificar inventario
+--syntax-ckeck: comprobar si la sintaxis esta bien  
+--list-task: listar las tareas 
+--step: pregunta paso a paso si continuar
+--start-at-task: empezr en una tarea
+	-start-at-task="copiar /etc/hosts"
+--forks:n/-f: limitar las tareas 
+	-ansible-playbook -i ./inventaario.py -f 1 copiar-hosts.yml
+-v: verbose, mostar mas informacion
+	-ansible-playbook -i -vvv ./inventaario.py copiar-hosts.yml
+
+
+Variables: contiene un valor modificable para dinamizar las tareas
+
+- facts: obtenidas del servidor
+- playbook: elementos varios
+- -e: linea de comandos
+- usa clave valor
+- ansible-playbook variables.yml
+- ansible-playbook -e miIP="192.168.330.10" variables.yml: especificar un puerto
+- variable multple: mi_var["apache","mariadb","php"]
+- debug: "texto"/ var:variable
+
+handlers: es una tarea que solo se ejecuta en caso de que otra tarea la llame
+
+- se ejecutan al final de las tareas 
+- modificar ficheros de configuracion 
+
+Include y roles:
+- include: incluye un archivo con tareas en una tarea
+	-ansible-playbook -i ./inventaario.py include.yml
+- role:  puede dividir un playbook en distintas partes y definir una estructura de ficheros y directorios
+	- son reutilizables
+	- ansible galaxy: repositorio de roles
+	ejemplo:
+	- mkdir web
+	- role_instalar.yml
+	- mkdir roles (al nivel de playbook)
+	- mkdir apache2 (dentro de role)
+	- mkdir files template task handlers (dentro de apache2)
+	- cp /root/apache2.config . (dentro de files)
+	- index.html.j2 (dentro de templates)
+	- main.yml (dentro de task)
+
+Templates: as expresiones se realizan mediante {{}}
+- puede contener expresiones como if: {%if ansible.distribution::"debian"%}{%endif%}
+- {% for usuario in lista_usuarios %} {{Usuario}} {%endif%}
+
+Prioridad de variables:
+- default: menor valor dentro de un rol
+- variables de grupo: inventario,grup_vars,group_vars/grupos
+- variales de servidor: inventario,hosts_vars/servidores
+- facts del servidor: las variables obtenidas desde el servidor 
+- variable del play: vars.pront,vars.files
+- variables de rol: definidas en roles/rol/vars/main.yml
+- variables del bloque: variables de las tareas 
+- parametros de role: include-params,include-vars
+
+condiciones: es posible condicionar la ejecucion de na tarea, la inclusion de un fichero o el uso de un rol unsando la expresion When
+
+- when: ansible-distribution::"Debian"
+- role apache when: ansible-distribution::"Debian"
+
+bucles: en instalar yml por ejemplo
+
+- apt: name{{items}} state:latest 
+  with_items:
+    - mariadb
+    - php5
+    - phpadmin
+
+- name: crear usuarios
+  user: name {{item.nombre}} state:present groups:{{item.groups}}
+   with_items:
+    - {nombre: usuario1, grupo: www-data}
+    - {nombre: usuario2, grupo:www-data}
+
+registro: 
+
+- registrer: permte guardar en una variable el resultado de una accion realizado por un odulo en una tarea
+- name: ejecutar tarea
+  command: uptime
+  registrer: salida_log
+- name: mostrar salida_log
+  debug:var:salida_log (salida_log.stdout): solo la salida
+
+ignore errors: permite ignorar errores
+
+- ignore-errors:true/false
+- file_when: permite marcar las condiciones para marcar una tarea como fallida/cambiada
+- changed_when: permite marcar las condiciones para marcar una tarea como fallida/cambiada
+
+    

@@ -1,0 +1,10 @@
+---
+- name: trabajar con modulo cpam
+  hosts: localhost
+  tasks:
+   - name: instalar cpam
+     yum: name=perl-app-cpanminus state=latest 
+   - name: instalar gcc
+     yum: name=gcc state=latest
+   - name: instalar DBI
+     cpanm: name=DBI state=present

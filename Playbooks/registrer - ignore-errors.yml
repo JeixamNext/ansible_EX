@@ -1,0 +1,14 @@
+---
+- name: Playbook para la clase registrer
+  host: localhost
+  task:
+    - name: ejecutar comando
+      command: cat/ect/host2
+      resgistrer: salida_log
+      ignore_errors: True
+    - name: mostar salida
+      debug: var:salida_log.stdout_lines
+      when: not salida_log|failed
+    - name: mostar salida
+      debug: var:salida_log.stdout_lines
+      when: salida_log|failed

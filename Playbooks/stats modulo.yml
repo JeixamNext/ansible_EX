@@ -1,0 +1,9 @@
+---
+- name: ejemplos de modulo de fiches y openssl 
+  host: localhost
+  become: True
+  task:
+    - name: utilizar stats 
+      stat: path=etc/services
+      register: datos
+    - debug: var=datos

@@ -1,0 +1,10 @@
+---
+- name: Playbook para la clase registrer
+  host: localhost
+  task:
+    - name: jecutar comando
+      command: uptime
+      resgistrer: salida_log
+    - name: mostar salida
+      debug: var:salida_log
+  

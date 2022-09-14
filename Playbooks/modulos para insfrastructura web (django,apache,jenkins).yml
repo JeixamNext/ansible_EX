@@ -1,0 +1,12 @@
+---
+  - name: modulos infra
+  - host: ubuntu
+  - task:
+     - apache2_module:
+         name: wsgi
+         state: present
+     - htpasswd: 
+         name: oforte_jeixam
+         path: /var/www/html/.htpasswd
+         password: 1#s3€€tr67y89k~€dd453
+       delegate_to: localhost

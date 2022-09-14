@@ -1,0 +1,56 @@
+Modulo debug:
+
+- visualiza el contenido de una variable
+(
+ task:
+  - debug: var=ansible_host
+  - debug: msg="mi ip es {{ansible_host}}"
+)
+- verbosity=1: omite a no ser que añadamos un -v
+
+Tags: etiquetas que permiten especificar selectivamente que tareas se ejecutaran o se omitiran
+
+(
+ task:
+  - debug: msg="tarea con tag dev"
+    tags: dev
+  - debug: msg="tarea con tag pro"
+    tags: pro
+  - debug: msg="tarea con varios tags"
+    tags: [qa,prod,exe]
+  - debug: msg="se ejecuta siempre"
+    tags: always
+)
+- especifica en el comando con --tags dev
+- se pueden especificar tabien en roles
+(
+   roles:
+     - {name: jojos.apache, tags:prueba]
+)
+
+Lookups: permite obtener datos desde el servidor que esta ejecutando el playbook
+
+- file
+- password
+- csvfile
+- ini
+- dig (informacion del dns)
+
+Vault: permite cifrar ficheros con una contraseña
+
+- ansible-vault
+- ansible-vault create nombre_fichero
+- ansible-vault edit nombre_fichero
+- ansible-vault encrypt fichero : cifrar un fichero ya existente
+- ansible-vault decryption fichero
+- ansible-vault view fichero : ver fichero encriptado 
+- con el comando ansible-playbook -e "@secreto" --ask-vault-pass vault.yaml
+	--ask-vault-pass (pide la contraseña)
+	--vault-pasword-file (pide la contraseña de un fichero)
+
+Tareas asincronas: cuando se realizan tareas en un servidor a traves de un modulo la conexion permanece abierta, ansible permie realizar tareas en segundo plano
+
+- async: tiempo maximo de ejecucion
+- poll: tiempo de consulta de la tarea asincrona 
+- registrer: var (resistrar una variable tras poner poll a 0)
+- asing-status: comprueba el estado con la variable 

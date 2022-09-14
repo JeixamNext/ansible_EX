@@ -1,0 +1,6 @@
+- name: instalar apache2 
+  apt: name=apache2 state=latest
+-name: habilitar servicio e iniciar 
+ service: name=apache2 state=started enabled=true
+-name: copiar fichero config 
+ copy: src=apache2.config dest=/ect/apache2/apache2.config

@@ -1,0 +1,7 @@
+---
+- hosts: prueba2
+  remote_user: jeixam
+  become: True
+  task:
+   - name: Instalar lftp
+     apt: name=lftp state=latest

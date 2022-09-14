@@ -1,0 +1,11 @@
+---
+- name: actualizar configuracion sshd_config
+  hosts: all 
+  remote_user: jeixam
+  tasks:
+   - name: copiar fichero
+   copy: src=sshd.config dest=/etc/ssh/ssh_config
+   notify: restart_sshd
+  handlers:
+   - name: restart_sshd
+     service: name=sshd state=restarted

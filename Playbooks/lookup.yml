@@ -1,0 +1,13 @@
+- name: ejemplo lookup
+  host: www
+  task:
+  - debug: msg="{{lookup('file','ect/motd')}}" #mostrar e pantalla el contenido de motd
+    tags: file
+  - debug: msg="{{lookup('password','ect/www_password.txt')}}" #mostrar e pantalla el contenido de motd
+    tags: pass
+  - debug: msg="{{lookup('csvfile','fila2 file=test.csv delemeter=,)}}"
+    tags: csv
+  - debug: msg="{{lookup('ini','engine section=php file=ect/php5/cli/php.ini )}}"
+    tags: ini
+  - debug: msg="{{lookup('dig','ww.server.net' )}}"
+    tags: ini

@@ -1,0 +1,9 @@
+---
+- name: Crear fichero variables
+  hosts: localhost
+  conecction: local 
+  vars: 
+   -miIP: "192.168.100.99"
+  task:
+   - name: crear fichero host
+     template: src=plantilla_variables.j2 dest=/temp/hosts

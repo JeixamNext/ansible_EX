@@ -1,0 +1,8 @@
+---
+- name: Copiar ficheros /ect/host a los servidores
+  hosts: all 
+  remote_user: jeixam
+  become: True
+  tasks:
+   - name: copiar /etc/hosts
+     copy: src=/etc/hosts dest=/etc/hosts

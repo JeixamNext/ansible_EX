@@ -1,0 +1,8 @@
+---
+  - name: modulos de control de versiones
+  - host: localhost
+  - task:
+     - name: descargar ejemplos ansible
+       git:
+        repo: https://github.com/ansible/ansible-examples.git
+        dest: /root/ansible-examples/

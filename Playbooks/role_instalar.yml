@@ -1,0 +1,7 @@
+---
+- name: instalar 
+  host: prueba3
+  remote_user: jeixam
+  become: True 
+  role: 
+    - apache2 

@@ -1,0 +1,87 @@
+Herramienta de codigo abierto para la automatizacion de infrastructuras (servidores,cloud,dispositivos,aplicaciones) 
+
+- linux,windows
+- AWS,GCP,vmware
+- swiches,routers
+- APIs, instalar,configurar,administar
+
+herramientas similares: chef,puppet,salt
+
+- no requiere agente
+- usa SSH
+- usa YAML
+- necesario uso de git para el control de versiones 
+- puede ser lento por el SSH
+
+Instalacion:
+
+- requiere python 2.4 minimo 
+- redhat/centos: yum install apel-release, yum install ansible
+- ubuntu: apt install software-properties-common, sudo app-add-repository ppa:ansible/ansible, apt update, apt install ansible
+
+Administar: Se instala en el servidor que controlara al resto
+
+- /etc/ansible/host
+- ansible localhost -m ping (m es el modulo a usar)
+- ansible_connection=local (en host para una conexion local)(la conexion por defecto es shh por lo que se necesitara keys para realizarla)
+- ansible ip/host -a "comando" (realizar un comando)
+- el modulo por defecto es commond a no ser que se especifique otro.
+- ansible localhost -a "hostname"
+################################################################################################################################################################################################################################################
+- ssh-keygen
+- copiarlo .pub en .ssh/Authorized_keys
+################################################################################################################################################################################################################################################
+
+- ansible ip -u usuario -m ping 
+- ansible all -u usuario -m ping
+- ansible_user=jeixam (/etc/ansible/host)
+- ansible all -m user -a "name=ansible_user state=present" --become (crear un usuario)(--become permite hacerlo como sudo)
+
+Inventariado: formato INI: nombre/ip clave:valor, los grupos van entre corchetes
+
+- localhost ansible_connection=local
+- [ubuntu] ip ansible_user=jeixam ansible_become=false (crea un grupo)
+- ansible debian -m ping
+- [apt:children] debian ubuntu (crear subgrupos)
+- [apt:vars] ansible_become=True (crear variable para escalar a root)
+- las variable pueden ir en ficheros en formato YAML
+################################################################################################################################################################################################################################################
+En etc/ansible
+- mkdir group_vars
+- nano apt (ansible_become: True)
+- mkdir host_vars
+- nano nombre del servidor o ip (ansible_become: False)
+################################################################################################################################################################################################################################################
+
+- ansible -i servidores (leer un archivo que contenga los host en un fichero diferente)
+
+Inventariado dinamico:
+
+- proveedor cloud: aws,gcp,ect
+- entorno propio: openstack,ovist,openshift,zabbix
+- https://github.com/ansible/ansible/tree/stable-2.9/contrib/inventory
+- docker.ini contiene la configuracion 
+- python docker.py --list 
+- ansible -i ./docker.py all -m ping
+
+ADHOC: permite realizar hacienes de forma simple y comprobar la conexion a los elementos del inventario 
+
+- ansible -i ./docker.py all -u jeixam -a "--version"
+- ansible local -u jeixam -m setup | less (informacion del sistema)
+- ansible local -b (--become) -u jeixam -m copy -a "src=/etc/host dest=...."
+- ansible all -b -u jeixam -m apt -a "name=vim state=present"
+- ansible all -b -u jeixam -m apt -a "name=vim state=absent" (desinstala)
+
+configuracion: 
+- ect/ansible/ansible.cfg
+
+################################################################################################################################################################################################################################################
+Combinar varios inventarios:
+
+- mkdir inventarios
+- añadir tanto el estatico host como el dinamico ej:docker.py docker.ini (cp /ect/ansible/hosts .)
+- ansible -i inventarios/ all --list-hosts 
+- [aws] server[1:4] ansible_user=jeixam
+################################################################################################################################################################################################################################################
+
+

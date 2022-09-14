@@ -1,0 +1,22 @@
+---
+  - name: modulos para windows
+  - hosts: windows
+    tasks:
+      - win_user:
+         name: oforte
+         password: a@.de7hk935vdlcmdie@ñdjjd|ldp084??~jsgsi
+         state: present
+         groups:
+          - Users
+      - win_command: woami
+        resgistrer: usuario # variable
+      - debug: var=usuario
+      - win_file: c:\Users\jeixam\Documents\apache2\conf
+        state: directory 
+      - win_copy: src=/ect/httpd\httpd.config dest=c:\Users\jeixam\Documents\apache2\conf\httpd.config
+      - win_lineinfile: 
+         dest: c:\Users\jeixam\Documents\apache2\conf\httpd.config
+         state: present
+         line: Listen 8080
+         regexp: "^Listen"
+      - win_service: name=spoleer state=stopped star_mode=manual
