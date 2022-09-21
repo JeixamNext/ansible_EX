@@ -1,0 +1,6 @@
+https://github.com/mrlesmithjr/ansible-windows-updates/blob/master/handlers/main.yml
+# repositorio con rol ejemplos para ansible 
+# ejemplo de playbook
+
+https://miquelmariano.github.io/2017/04/06/roles-y-playbooks-Ansible/
+
